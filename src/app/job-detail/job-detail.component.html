@@ -1,0 +1,37 @@
+<div class="col-md-6">
+    <div class="row">
+        <button routerLink="">Back</button>
+    </div>
+
+        <div class="row">
+            <div>
+                <img style="height: 40px;" src="{{jobDetail['companyLogo']}}">
+            </div>
+            <div style="padding-left: 10px;">
+                {{jobDetail['companyName']}} -   {{jobDetail['title']}}     
+            </div>
+        </div>
+
+        <div class="row">  
+            <ul>
+                <li *ngFor="let type of jobDetail['types']">{{ type }}</li>
+              </ul>
+        </div>
+
+        <div class="row">  
+            Publish Date -  {{jobDetail['publishDate']}}
+        </div>
+
+        <div class="row">  
+            Location -  {{jobDetail['location']}}
+        </div>
+
+         <div class="row">  
+            Reference -  {{jobDetail['reference']}}
+         </div>
+         Description:
+         <div  class="row" [innerHTML]="jobDetail['description']"> 
+             
+         </div>
+           
+    </div>

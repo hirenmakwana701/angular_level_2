@@ -1,0 +1,20 @@
+<div  class="tabcontent" style="margin-top: 10px;">
+    <div class="col-md-6" *ngFor="let job of favouriteJobs">
+        <div class="row" style="margin-bottom: 10px;" *ngIf="favouriteJobIds.includes(job.id)">
+            <div>
+                <img style="height: 40px;" src="{{job.companyLogo}}">
+            </div>
+            <div>
+                <h3>
+                    <a style="cursor: pointer;" routerLink="/job-detail/{{job.id}}">  {{job.title}} </a> 
+                  </h3>
+                <span> Company : {{job.companyName}} </span>
+                <span> Reference : {{job.reference}} </span>
+            </div>
+            <hr />
+        </div>
+    </div>
+    <h3 *ngIf="!favouriteJobIds.length">
+        You did not added any favourite job.
+    </h3>
+  </div>
