@@ -1,7 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HttpClient } from '@angular/common/http';
 import { RouterLink } from '@angular/router';
+import { JOBS } from '../job.interfaces'; 
+import { JobService } from '../job-service';
+
 @Component({
     selector: 'app-favourite-job',
     standalone: true,
@@ -9,22 +11,18 @@ import { RouterLink } from '@angular/router';
     templateUrl: './favourite-job.component.html',
     styleUrl: './favourite-job.component.css'
 })
-export class FavouriteJobComponent {
+export class FavouriteJobComponent  implements OnInit {
     storedFavouriteJobIds = localStorage.getItem('fav_job_ids');
     favouriteJobIds: number[] = [];
-    favouriteJobs: any;
-    constructor(private http: HttpClient) {
+    favouriteJobs : JOBS[] | undefined;
+    constructor(private jobService: JobService) {
         if (this.storedFavouriteJobIds) {
             this.favouriteJobIds = JSON.parse(this.storedFavouriteJobIds);
-        }
-        this.http.get('/jobs').subscribe({
-            next: (response: Record<string, any>) => {
-                if (!response) return;
-                this.favouriteJobs = response;
-            },
-            error: (err) => {
-
-            }
+        } 
+    }
+    ngOnInit() {
+        this.jobService.fetchJob().subscribe((result) => {
+            this.favouriteJobs = result;
         });
     }
 }
