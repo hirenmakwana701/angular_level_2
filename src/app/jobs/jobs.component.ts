@@ -18,6 +18,9 @@ export class JobsComponent implements OnInit {
     favouriteJobIds: number[] = [];
     allJobs: JOBS[] | undefined;
     constructor(private jobService: JobService) {
+        if (this.storedFavouriteJobIds) {
+            this.favouriteJobIds = JSON.parse(this.storedFavouriteJobIds);
+        }
     }
     ngOnInit() {
         this.jobService.fetchJob().subscribe((result) => {
